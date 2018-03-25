@@ -1,4 +1,3 @@
-import { AppRegistry } from 'react-native';
 import React, { Component } from 'react';
 import {
     Text,
@@ -8,7 +7,6 @@ import {
     StyleSheet
 } from 'react-native';
 
-type Props = {};
 const width = Dimensions.get('screen').width;
 let size = { width: width, height: width }
 

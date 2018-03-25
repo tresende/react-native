@@ -18,7 +18,7 @@ class InstaluraMobile extends Component {
         return (
             <FlatList style={styles.container}
                 data={fotos}
-                keyExtractor={item => item.id}
+                keyExtractor={item => String(item.id)}
                 renderItem={({ item }) =>
                     <Post foto={item} />
                 }
