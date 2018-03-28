@@ -25,10 +25,24 @@ export default class Post extends Component {
     }
 
     like() {
-        const fotoAtualizada = {
-            ...this.state.foto,
-            likeada: !this.state.foto.likeada
+        let foto = this.state.foto;
+        let novaLista = [];
+        if (!foto.likeada) {
+            novaLista = [
+                ...foto.likers,
+                { login: 'meuUsuario' }
+            ];
+        } else {
+            novaLista = foto.likers.filter((item) => {
+                return item.login != 'meuUsuario'
+            });
         }
+
+        const fotoAtualizada = {
+            ...foto,
+            likeada: !foto.likeada,
+            likers: novaLista
+        };
         this.setState({ foto: fotoAtualizada })
     }
 
@@ -41,7 +55,7 @@ export default class Post extends Component {
     }
 
     exibeLegenda(foto) {
-        
+
         if (foto.comentario === '')
             return;
 
