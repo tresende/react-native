@@ -11,3 +11,4 @@ Código dos cursos:
 2 - Run `npm install`<br />
 3 - Start React-Native `react-native start`<br />
 4 - Run app `react-native run-ios` or `react-native run-android`
+5 - Start API `java -jar -Dspring.datasource.password=root instalura.jar` (mysql user root)
