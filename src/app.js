@@ -43,7 +43,7 @@ class InstaluraMobile extends Component {
 const margem = Platform.OS == 'ios' ? 20 : 0;
 const styles = StyleSheet.create({
     container: {
-        marginTop: margin
+        marginTop: margem
     }
 })
 
