@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
     StyleSheet,
-    FlatList
+    FlatList,
+    Platform
 } from 'react-native';
 
 import Post from './components/Post';
@@ -15,6 +16,8 @@ class InstaluraMobile extends Component {
             fotos: []
         }
     }
+
+    //android ip 10.0.2.2l:8080
 
     //componente montou
     componentDidMount() {
@@ -37,9 +40,10 @@ class InstaluraMobile extends Component {
     }
 }
 
+const margem = Platform.OS == 'ios' ? 20 : 0;
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20
+        marginTop: margin
     }
 })
 
