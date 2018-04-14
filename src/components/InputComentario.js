@@ -9,15 +9,17 @@ import {
 
 export default class InputComentario extends Component {
 
-    constructor(){
+    constructor() {
 
         super();
         this.state = {
-            valorComentario : ''
+            valorComentario: ''
         }
     }
 
     render() {
+        const { idFoto } = this.props;
+        const { comentarioCallback } = this.props;
 
         return (
 
@@ -28,11 +30,12 @@ export default class InputComentario extends Component {
                     style={styles.input} placeholder="Adicione um Comentário"
                     underlineColorAndroid="transparent"
                 />
-                
+
                 <TouchableOpacity onPress={() => {
-                    this.props.comentarioCallback(this.state.valorComentario, this.inputComentario)
-                    this.setState({valorComentario:''})
-                    }}>
+                    this.props.comentarioCallback(this.props.idFoto,
+                        this.state.valorComentario, this.inputComentario)
+                    this.setState({ valorComentario: '' })
+                }}>
                     <Image style={styles.icone} source={require('../../resources/img/send.png')} />
                 </TouchableOpacity>
             </View>

@@ -17,24 +17,6 @@ let size = { width: width, height: width }
 
 export default class Post extends Component {
 
-    adicionaComentario(valorComentario, inputComentario) {
-        const novaLista = [
-            ...this.props.foto.comentarios,
-            {
-                id: valorComentario,
-                login: 'meuUsuario',
-                texto: valorComentario
-            }
-        ];
-
-        const fotoAtualizada = {
-            ...this.props.foto,
-            comentarios: novaLista
-        }
-        this.setState({ foto: fotoAtualizada });
-        inputComentario.clear();
-    }
-
     exibeLegenda(foto) {
 
         if (foto.comentario === '')
@@ -49,8 +31,7 @@ export default class Post extends Component {
     }
 
     render() {
-        const { likeCallback } = this.props;
-        const foto = this.props.foto;
+        const { foto, likeCallback, comentarioCallback } = this.props;
         return (
             <View>
                 <View style={styles.cabecalho}>
@@ -63,14 +44,14 @@ export default class Post extends Component {
                 <View style={styles.rodape}>
                     <Likes foto={foto} likeCallback={likeCallback} />
                     {
-                        foto.comentarios.map(comentario =>
-                            <View style={styles.comentario} key={comentario.id}>
+                        foto.comentarios.map((comentario, key) =>
+                            <View style={styles.comentario} key={comentario.id || key}>
                                 <Text style={styles.tituloComentario}>{comentario.login}</Text>
                                 <Text>{comentario.texto}</Text>
                             </View>
                         )
                     }
-                    <InputComentario comentarioCallback={this.adicionaComentario.bind(this)} />
+                    <InputComentario idFoto={foto.id} comentarioCallback={comentarioCallback} />
                 </View>
             </View>
         );
