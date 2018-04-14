@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InputComentario from './InputComentario'
+import Likes from './Likes'
 
 import {
     Text,
@@ -22,10 +23,6 @@ export default class Post extends Component {
             foto: this.props.foto,
             valorComentario: ''
         }
-    }
-
-    carregaIcone(likeada) {
-        return likeada ? require('../../resources/img/s2-checked.png') : require('../../resources/img/s2.png')
     }
 
     adicionaComentario(valorComentario, inputComentario) {
@@ -68,13 +65,7 @@ export default class Post extends Component {
         this.setState({ foto: fotoAtualizada })
     }
 
-    exibeLike(likers) {
-        return (
-            likers.length > 0 ?
-                <Text style={styles.likes}>{likers.length} {likers.length > 1 ? 'curtidas' : 'curtida'}</Text>
-                : null
-        )
-    }
+
 
     exibeLegenda(foto) {
 
@@ -102,11 +93,7 @@ export default class Post extends Component {
                 <Image source={{ uri: foto.urlFoto }} style={styles.foto} />
                 {this.exibeLegenda(foto)}
                 <View style={styles.rodape}>
-                    <TouchableOpacity onPress={this.like.bind(this)}>
-                        <Image style={styles.botaoDeLike}
-                            source={this.carregaIcone(foto.likeada)} />
-                    </TouchableOpacity>
-                    {this.exibeLike(foto.likers)}
+                    <Likes foto={foto} likeCallback={this.like.bind(this)} />
                     {
                         foto.comentarios.map(comentario =>
                             <View style={styles.comentario} key={comentario.id}>
@@ -115,7 +102,7 @@ export default class Post extends Component {
                             </View>
                         )
                     }
-                    <InputComentario comentarioCallback={this.adicionaComentario.bind(this)}/>
+                    <InputComentario comentarioCallback={this.adicionaComentario.bind(this)} />
                 </View>
             </View>
         );
@@ -143,9 +130,6 @@ const styles = StyleSheet.create({
     },
     rodape: {
         margin: 10
-    },
-    likes: {
-        fontWeight: 'bold'
     },
     comentario: {
         flexDirection: 'row'
