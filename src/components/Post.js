@@ -17,17 +17,9 @@ let size = { width: width, height: width }
 
 export default class Post extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            foto: this.props.foto,
-            valorComentario: ''
-        }
-    }
-
     adicionaComentario(valorComentario, inputComentario) {
         const novaLista = [
-            ...this.state.foto.comentarios,
+            ...this.props.foto.comentarios,
             {
                 id: valorComentario,
                 login: 'meuUsuario',
@@ -36,36 +28,12 @@ export default class Post extends Component {
         ];
 
         const fotoAtualizada = {
-            ...this.state.foto,
+            ...this.props.foto,
             comentarios: novaLista
         }
         this.setState({ foto: fotoAtualizada });
         inputComentario.clear();
     }
-
-    like() {
-        let foto = this.state.foto;
-        let novaLista = [];
-        if (!foto.likeada) {
-            novaLista = [
-                ...foto.likers,
-                { login: 'meuUsuario' }
-            ];
-        } else {
-            novaLista = foto.likers.filter((item) => {
-                return item.login != 'meuUsuario'
-            });
-        }
-
-        const fotoAtualizada = {
-            ...foto,
-            likeada: !foto.likeada,
-            likers: novaLista
-        };
-        this.setState({ foto: fotoAtualizada })
-    }
-
-
 
     exibeLegenda(foto) {
 
@@ -81,8 +49,8 @@ export default class Post extends Component {
     }
 
     render() {
-
-        const foto = this.state.foto;
+        const { likeCallback } = this.props;
+        const foto = this.props.foto;
         return (
             <View>
                 <View style={styles.cabecalho}>
@@ -93,7 +61,7 @@ export default class Post extends Component {
                 <Image source={{ uri: foto.urlFoto }} style={styles.foto} />
                 {this.exibeLegenda(foto)}
                 <View style={styles.rodape}>
-                    <Likes foto={foto} likeCallback={this.like.bind(this)} />
+                    <Likes foto={foto} likeCallback={likeCallback} />
                     {
                         foto.comentarios.map(comentario =>
                             <View style={styles.comentario} key={comentario.id}>
