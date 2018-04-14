@@ -26,8 +26,19 @@ class InstaluraMobile extends Component {
             .then(json => this.setState({ fotos: json }));
     }
 
+    buscaPorId(idFoto) {
+        return this.state.fotos
+            .find(foto => foto.id === idFoto)
+    }
+
+    atualizaFotos(fotoAtualizada) {
+        const fotos = this.state.fotos.map(foto =>
+            foto.id === fotoAtualizada.id ? fotoAtualizada : foto);
+        this.setState({ fotos });
+    }
+
     like(idFoto) {
-        let foto = this.state.fotos.find(foto => foto.id == idFoto);
+        let foto = this.buscaPorId(idFoto);
         let novaLista = [];
         if (!foto.likeada) {
             novaLista = [
@@ -46,13 +57,11 @@ class InstaluraMobile extends Component {
             likers: novaLista
         };
 
-        const fotos = this.state.fotos.map(foto => foto.id === idFoto ? fotoAtualizada : foto);
-
-        this.setState({ fotos })
+        this.atualizaFotos(fotoAtualizada);
     }
 
     adicionaComentario(idFoto, valorComentario, inputComentario) {
-        let foto = this.state.fotos.find(foto => foto.id == idFoto);
+        let foto = this.buscaPorId(idFoto);
         const novaLista = [...foto.comentarios, {
             id: this.state.valorComentario,
             login: 'meuUsuario',
@@ -63,9 +72,7 @@ class InstaluraMobile extends Component {
             ...foto,
             comentarios: novaLista
         }
-        const fotos = this.state.fotos.map(foto => foto.id === idFoto ? fotoAtualizada : foto);
-
-        this.setState({ fotos })
+        this.atualizaFotos(fotoAtualizada);
         inputComentario.clear();
     }
 
