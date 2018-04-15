@@ -8,17 +8,28 @@ import {
     TouchableOpacity,
     TextInput,
     StyleSheet,
-    Button
+    Button,
+    AsyncStorage
 } from 'react-native';
 
 export default class Login extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            usuario: '',
+            senha: '',
+            mensagem: ''
+        };
+    }
 
     efeturaLogin() {
         const uri = "http://localhost:8080/api/public/login"
         const requestInfo = {
             method: 'POST',
             headers: new Headers({
-                'Content-type': 'application/json'
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
                 login: this.state.usuario,
@@ -26,6 +37,7 @@ export default class Login extends Component {
             })
         }
         fetch(uri, requestInfo).then((response) => {
+            console.warn('Deu bug');
             if (response.ok) {
                 return response.text();
             }
@@ -33,8 +45,11 @@ export default class Login extends Component {
                 throw new Error("Não foi possível efetuar login");
             }
         }).then(token => {
-            console.warn(token);
-        })
+            AsyncStorage.setItem('token', token);
+            AsyncStorage.setItem('usuario', this.state.usuario);
+        }).catch(e => {
+            this.setState({ mensagem: e.message });
+        });
     }
 
     render() {
@@ -55,6 +70,9 @@ export default class Login extends Component {
 
                     <Button title="Login" onPress={this.efeturaLogin.bind(this)} />
                 </View>
+                <Text style={styles.mensagem}>
+                    {this.state.mensagem}
+                </Text>
             </View>
         );
     }
@@ -78,5 +96,9 @@ const styles = StyleSheet.create({
     titulo: {
         fontWeight: 'bold',
         fontSize: 26
+    },
+    mensagem: {
+        marginTop: 15,
+        color: '#e74c3c'
     }
 })
