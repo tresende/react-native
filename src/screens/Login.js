@@ -37,7 +37,6 @@ export default class Login extends Component {
             })
         }
         fetch(uri, requestInfo).then((response) => {
-            console.warn('Deu bug');
             if (response.ok) {
                 return response.text();
             }
@@ -47,9 +46,11 @@ export default class Login extends Component {
         }).then(token => {
             AsyncStorage.setItem('token', token);
             AsyncStorage.setItem('usuario', this.state.usuario);
-        }).catch(e => {
-            this.setState({ mensagem: e.message });
-        });
+            this.props.navigator.push({
+                screen: 'Feed',
+                title: 'Instalura',
+            })
+        })
     }
 
     render() {
