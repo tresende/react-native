@@ -77,10 +77,8 @@ export default class Feed extends Component {
     }
 
     render() {
-
         return (
-            <FlatList style={styles.container}
-                data={this.state.fotos}
+            <FlatList data={this.state.fotos}
                 keyExtractor={item => String(item.id)}
                 renderItem={({ item }) =>
                     <Post comentarioCallback={this.adicionaComentario.bind(this)} likeCallback={this.like.bind(this)} foto={item} />
@@ -89,11 +87,3 @@ export default class Feed extends Component {
         );
     }
 }
-
-const margem = Platform.OS == 'ios' ? 20 : 0;
-const styles = StyleSheet.create({
-    container: {
-        marginTop: margem
-        
-    }
-})
