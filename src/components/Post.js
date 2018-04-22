@@ -32,12 +32,14 @@ export default class Post extends Component {
 
     render() {
         const { foto, likeCallback, comentarioCallback } = this.props;
+        foto.urlPerfil = 'https://randomuser.me/api/portraits/men/'+ Math.floor(Math.random() * 6) + 1  +'.jpg';
         return (
             <View>
                 <View style={styles.cabecalho}>
                     <Image source={{ uri: foto.urlPerfil }}
                         style={styles.fotoDePerfil} />
-                    <Text>{foto.loginUsuario}</Text>
+                    <Text>{foto.loginUsuario}
+                    </Text>
                 </View>
                 <Image source={{ uri: foto.urlFoto }} style={styles.foto} />
                 {this.exibeLegenda(foto)}

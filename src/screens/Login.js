@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import Notificacao from '../api/Notificacao'
 
 import {
     Text,
-    Image,
     View,
     Dimensions,
-    TouchableOpacity,
     TextInput,
     StyleSheet,
     Button,
@@ -41,7 +40,7 @@ export default class Login extends Component {
                 return response.text();
             }
             else {
-                throw new Error("Não foi possível efetuar login");
+                Notificacao.exibe("Não foi possível efetuar login");
             }
         }).then(token => {
             AsyncStorage.setItem('token', token);
