@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {
     AsyncStorage,
-    AppRegistry,
     StyleSheet,
     FlatList,
-    Platform
+    ScrollView
 } from 'react-native';
 
 import Post from './Post';
-import InstaluraFetchService from '../services/InstaluraFetchService';
+import InstaluraFetchService from '../services/InstaluraFetchService'
 import Notificacao from '../api/Notificacao'
+import HeaderUsuario from './HeaderUsuario'
 
 export default class Feed extends Component {
 
@@ -24,7 +24,20 @@ export default class Feed extends Component {
 
     //componente montou
     componentDidMount() {
-        InstaluraFetchService.get(`http://localhost:8080/api/fotos`)
+        this.props.navigator.setOnNavigatorEvent(evento => {
+            if (evento.id === 'willAppear') {
+                this.load();
+            }
+        })
+        this.load();
+    }
+
+    load() {
+        let uri = 'http://localhost:8080/api/fotos/';
+        if (this.props.usuario) {
+            uri = `http://localhost:8080/api/public/fotos/${this.props.usuario}`;
+        }
+        InstaluraFetchService.get(uri)
             .then(json => this.setState({ fotos: json }))
             .catch(e => {
                 Notificacao.exibe('Ops...', 'Algo deu errado!')
@@ -97,14 +110,38 @@ export default class Feed extends Component {
             });;
     }
 
+    verPerfil(idFoto) {
+        const foto = this.buscaPorId(idFoto);
+        this.props.navigator.push({
+            screen: 'PerfilUsuario',
+            backButtonTitle: '',
+            title: foto.loginUsuario,
+            passProps: {
+                usuario: foto.loginUsuario,
+                fotoDePerfil: foto.urlPerfil || 'https://randomuser.me/api/portraits/men/' + Math.floor(Math.random() * 6) + 1 + '.jpg'
+            }
+        })
+    }
+
+    exibeHeader() {
+        if (this.props.usuario) {
+            return <HeaderUsuario posts={this.state.fotos.length} {...this.props} />
+        }
+    }
+
     render() {
         return (
-            <FlatList data={this.state.fotos}
-                keyExtractor={item => String(item.id)}
-                renderItem={({ item }) =>
-                    <Post comentarioCallback={this.adicionaComentario.bind(this)} likeCallback={this.like.bind(this)} foto={item} />
-                }
-            />
+            <ScrollView>
+                {this.exibeHeader()}
+                <FlatList data={this.state.fotos}
+                    keyExtractor={item => String(item.id)}
+                    renderItem={({ item }) =>
+                        <Post verPerfilCallback={this.verPerfil.bind(this)}
+                            comentarioCallback={this.adicionaComentario.bind(this)}
+                            likeCallback={this.like.bind(this)} foto={item} />
+                    }
+                />
+            </ScrollView>
         );
     }
 }

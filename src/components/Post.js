@@ -31,16 +31,18 @@ export default class Post extends Component {
     }
 
     render() {
-        const { foto, likeCallback, comentarioCallback } = this.props;
-        foto.urlPerfil = 'https://randomuser.me/api/portraits/men/'+ Math.floor(Math.random() * 6) + 1  +'.jpg';
+        const { foto, likeCallback, comentarioCallback, verPerfilCallback } = this.props;
+        foto.urlPerfil = 'https://randomuser.me/api/portraits/men/' + Math.floor(Math.random() * 6) + 1 + '.jpg';
         return (
             <View>
-                <View style={styles.cabecalho}>
+                <TouchableOpacity style={styles.cabecalho} onPress={() => {
+                    verPerfilCallback(foto.id)
+                }} >
                     <Image source={{ uri: foto.urlPerfil }}
                         style={styles.fotoDePerfil} />
                     <Text>{foto.loginUsuario}
                     </Text>
-                </View>
+                </TouchableOpacity>
                 <Image source={{ uri: foto.urlFoto }} style={styles.foto} />
                 {this.exibeLegenda(foto)}
                 <View style={styles.rodape}>
