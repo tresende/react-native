@@ -5,7 +5,6 @@ Código dos cursos:
 
 * [React Native parte 2: Aprimorando app com navegação e mais recursos](https://cursos.alura.com.br/course/react-native-parte-2)
 
-
 ## Development Environment Setup:
 1 - Clone this repository<br />
 2 - Run `npm install`<br />
