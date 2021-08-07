@@ -1,4 +1,0 @@
-docker run -p 8080:8080 -p 3306:3306 -it --rm -v /Users/thiago/Desktop/Study/:/usr/src -v /Users/thiago/Desktop/Study/database:/var/lib/mysql dev /bin/bash
-service mysql start
-cd /usr/src/react-native
-java -jar -Dspring.datasource.password=root instalura.jar &
