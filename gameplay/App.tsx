@@ -1,27 +1,30 @@
 import React from 'react'
-import SignIn from './src/screens/SignIn'
+import { ScrollView, StatusBar } from 'react-native'
+import { useFonts } from 'expo-font'
+import AppLoading from 'expo-app-loading'
+import { Rajdhani_500Medium, Rajdhani_700Bold } from '@expo-google-fonts/rajdhani'
+import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
 
-const App = () => <SignIn />
+import SignIn from './src/screens/SignIn'
+import Background from './src/components/Background'
+
+const App = () => {
+  const [fontsLoaded] = useFonts({
+    Rajdhani_500Medium,
+    Rajdhani_700Bold,
+    Inter_400Regular,
+    Inter_500Medium
+  })
+  if (!fontsLoaded) return <AppLoading />
+
+  return (
+    <Background>
+      <ScrollView>
+        <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+        <SignIn />
+      </ScrollView>
+    </Background>
+  )
+}
 
 export default App
-// import { StatusBar } from 'expo-status-bar'
-// import React from 'react'
-// import { StyleSheet, Text, View } from 'react-native'
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Fodas!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   )
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center'
-//   }
-// })
