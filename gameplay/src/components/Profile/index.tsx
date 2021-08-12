@@ -10,7 +10,7 @@ const Profile = () => (
     <View>
       <View style={styles.user}>
         <Text style={styles.greeting}>Olá,</Text>
-        <Text style={styles.username}>Thiago Resende</Text>
+        <Text style={styles.username}>Thiago</Text>
       </View>
       <Text style={styles.message}>Hoje é dia de vitória</Text>
     </View>
