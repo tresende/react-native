@@ -3,8 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Home from '../screens/Home'
 import SignIn from '../screens/SignIn'
-import { theme } from '../global/styles/theme'
 import WithScroll from '../hoc/WithScroll'
+import WithBackground from '../hoc/WithBackground'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -19,7 +19,7 @@ const AuthRoutes = () => {
       }}
     >
       <Screen name="SignIn" component={WithScroll(SignIn)} />
-      <Screen name="Home" component={Home} />
+      <Screen name="Home" component={WithBackground(Home)} />
     </Navigator>
   )
 }
