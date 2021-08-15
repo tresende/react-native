@@ -41,7 +41,6 @@ const Appointment = ({ data, ...rest }: Props) => {
         <View style={styles.content}>
           <View style={styles.header}>
             <Text style={styles.title}>{data.guild.name}</Text>
-
             <Text style={styles.category}>{category?.title}</Text>
           </View>
           <View style={styles.footer}>

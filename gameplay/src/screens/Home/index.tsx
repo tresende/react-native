@@ -1,17 +1,17 @@
-import React from 'react'
-import { useState } from 'react'
-import { Text, View, FlatList } from 'react-native'
-import Appointment from '../../components/Appointment'
+import React, { useState } from 'react'
+import { View, FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
+import Appointment from '../../components/Appointment'
 import ButtonAdd from '../../components/ButtonAdd'
 import CategorySelect from '../../components/CategorySelect'
 import ListDivider from '../../components/ListDivider'
 import ListHeader from '../../components/ListHeader'
 import Profile from '../../components/Profile'
-
 import { styles } from './styles'
 
 const Home = () => {
+  const navigation = useNavigation()
   const [category, setCategory] = useState('1')
 
   const handleCategorySelect = (categoryId: string) => {
@@ -70,6 +70,10 @@ const Home = () => {
     }
   ]
 
+  const handleAppointmentDetails = () => {
+    navigation.navigate('AppointmentDetails')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -84,7 +88,7 @@ const Home = () => {
         data={appointments}
         ItemSeparatorComponent={() => <ListDivider />}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Appointment data={item} />}
+        renderItem={({ item }) => <Appointment onPress={handleAppointmentDetails} data={item} />}
       />
     </View>
   )

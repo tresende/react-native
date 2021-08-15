@@ -1,17 +1,17 @@
 import React from 'react'
+import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import Background from '../components/Background'
 import WithBackground from './WithBackground'
 
 const WithScroll = (WrappedComponent: React.ComponentType) => {
   const Component = WithBackground(() => (
-    <Background>
-      <ScrollView>
+    <ScrollView removeClippedSubviews={false}>
+      <View style={{ flex: 1 }}>
         <WrappedComponent />
-      </ScrollView>
-    </Background>
+      </View>
+    </ScrollView>
   ))
-  return Component
+  return WithBackground(Component)
 }
 
 export default WithScroll
