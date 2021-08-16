@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 
 type Props = {
   title: string
-  action: React.ReactNode
+  action?: React.ReactNode
 }
 
 const Header = ({ title, action }: Props) => {

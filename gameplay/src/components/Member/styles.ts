@@ -26,5 +26,6 @@ export const styles = StyleSheet.create({
   status: {
     flexDirection: 'row',
     alignItems: 'center'
-  }
+  },
+  field: {}
 })
