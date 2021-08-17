@@ -3,16 +3,30 @@ import { View, Text, ScrollView, Platform, KeyboardAvoidingView } from 'react-na
 import { Feather } from '@expo/vector-icons'
 import { RectButton } from 'react-native-gesture-handler'
 
-import Header from '../../components/Header'
 import { styles } from './styles'
+import Guilds from '../Guilds'
+import Button from '../../components/Button'
+import Header from '../../components/Header'
+import Textarea from '../../components/Textarea'
 import { theme } from '../../global/styles/theme'
-import CategorySelect from '../../components/CategorySelect'
+import ModalView from '../../components/ModalView'
 import GuildIcon from '../../components/GuildIcon'
 import SmallInput from '../../components/SmallInput'
-import Textarea from '../../components/Textarea'
+import CategorySelect from '../../components/CategorySelect'
+import { GuildModel } from '../../components/Appointment'
 
 const AppointmentCreate = () => {
   const [category, setCategory] = useState('1')
+  const [guild, setGuild] = useState<GuildModel>({} as GuildModel)
+  const [openGuildModal, setOpenGuildModal] = useState(false)
+
+  const openModal = () => setOpenGuildModal(true)
+
+  const handleGuildSelected = (guildSelected: GuildModel) => {
+    console.log(guildSelected)
+    setGuild(guildSelected)
+    setOpenGuildModal(false)
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -32,11 +46,11 @@ const AppointmentCreate = () => {
         </Text>
         <CategorySelect hasCheckbox setCategory={setCategory} categorySelected={category} />
         <View style={styles.form}>
-          <RectButton>
+          <RectButton onPress={openModal}>
             <View style={styles.select}>
-              {<GuildIcon /> || <View style={styles.image} />}
+              {guild.name ? <GuildIcon /> : <View style={styles.image} />}
               <View style={styles.selectBody}>
-                <Text style={styles.label}>Selecione um servidor</Text>
+                <Text style={styles.label}>{guild.name ?? 'Selecione um servidor'}</Text>
               </View>
               <Feather name="chevron-right" color={theme.colors.heading} size={20} />
             </View>
@@ -71,8 +85,14 @@ const AppointmentCreate = () => {
             <Text style={styles.caractersLimit}>Max 100 Caracteres</Text>
           </View>
           <Textarea multiline maxLength={100} numberOfLines={5} />
+          <View style={styles.footer}>
+            <Button title="Agendar" />
+          </View>
         </View>
       </ScrollView>
+      <ModalView visible={openGuildModal}>
+        <Guilds handleGuildSelected={handleGuildSelected} />
+      </ModalView>
     </KeyboardAvoidingView>
   )
 }

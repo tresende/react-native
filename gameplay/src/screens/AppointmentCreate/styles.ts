@@ -56,5 +56,9 @@ export const styles = StyleSheet.create({
   column: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  footer: {
+    marginVertical: 24,
+    marginBottom: 56
   }
 })

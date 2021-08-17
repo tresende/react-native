@@ -10,16 +10,16 @@ import GuildIcon from '../GuildIcon'
 import { categories } from '../../utils/categories'
 import { theme } from '../../global/styles/theme'
 
-export type GuildProps = {
+export type GuildModel = {
   id: string
   name: string
-  icon: null
+  icon?: string
   owner: boolean
 }
 
 export type AppointmentProps = {
   id: string
-  guild: GuildProps
+  guild: GuildModel
   category: string
   date: string
   description: string
