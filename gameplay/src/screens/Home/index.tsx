@@ -87,6 +87,7 @@ const Home = () => {
         data={appointments}
         ItemSeparatorComponent={() => <ListDivider />}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingBottom: 20 }}
         renderItem={({ item }) => <Appointment onPress={handleAppointmentDetails} data={item} />}
       />
     </View>

@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 4,
     borderRadius: 8,
-    padding: 8
+    padding: 8,
+    borderColor: theme.colors.secondary50,
+    borderBottomWidth: 1
   }
 })

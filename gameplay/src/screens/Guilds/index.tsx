@@ -33,7 +33,7 @@ const Guilds = ({ handleGuildSelected }: Props) => {
         data={guilds}
         keyExtractor={({ id }) => id}
         showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={() => <ListDivider />}
+        ItemSeparatorComponent={() => <ListDivider isCentralized />}
         renderItem={({ item }) => <Guild data={item} onPress={() => handleGuildSelected(item)} />}
       />
     </View>

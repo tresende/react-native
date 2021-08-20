@@ -6,7 +6,11 @@ const border = {
   borderWidth: 1,
   borderRadius: 8
 }
-
+const label = {
+  fontFamily: theme.fonts.title700,
+  fontSize: 18,
+  color: theme.colors.heading
+}
 export const styles = StyleSheet.create({
   container: {},
   form: {
@@ -31,10 +35,10 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.secondary50,
     ...border
   },
-  label: {
-    fontFamily: theme.fonts.title700,
-    fontSize: 18,
-    color: theme.colors.heading
+  label,
+  formLabel: {
+    ...label,
+    marginBottom: 12
   },
   caractersLimit: {
     fontFamily: theme.fonts.text400,

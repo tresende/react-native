@@ -21,6 +21,7 @@ const AppointmentCreate = () => {
   const [openGuildModal, setOpenGuildModal] = useState(false)
 
   const openModal = () => setOpenGuildModal(true)
+  const handleCloseModal = () => setOpenGuildModal(false)
 
   const handleGuildSelected = (guildSelected: GuildModel) => {
     console.log(guildSelected)
@@ -57,7 +58,7 @@ const AppointmentCreate = () => {
           </RectButton>
           <View style={styles.field}>
             <View>
-              <Text style={styles.label}>Dia e mês</Text>
+              <Text style={styles.formLabel}>Dia e mês</Text>
               <View style={styles.column}>
                 <SmallInput maxLength={2} />
                 <Text style={styles.divider}>/</Text>
@@ -65,7 +66,7 @@ const AppointmentCreate = () => {
               </View>
             </View>
             <View>
-              <Text style={styles.label}>Hora e minuto</Text>
+              <Text style={styles.formLabel}>Hora e minuto</Text>
               <View style={styles.column}>
                 <SmallInput maxLength={2} />
                 <Text style={styles.divider}>:</Text>
@@ -90,7 +91,7 @@ const AppointmentCreate = () => {
           </View>
         </View>
       </ScrollView>
-      <ModalView visible={openGuildModal}>
+      <ModalView visible={openGuildModal} closeModal={handleCloseModal}>
         <Guilds handleGuildSelected={handleGuildSelected} />
       </ModalView>
     </KeyboardAvoidingView>

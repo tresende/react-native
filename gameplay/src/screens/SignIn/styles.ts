@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
     height: 360
   },
   content: {
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    flex: 1
   },
   title: {
     color: theme.colors.heading,
@@ -27,5 +28,9 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 40,
     fontFamily: theme.fonts.title500
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'center'
   }
 })
