@@ -29,31 +29,33 @@ const AppointmentDetails = () => {
   ]
   return (
     <View style={styles.container}>
-      <Header
-        title="Detalhes"
-        action={
-          <BorderlessButton>
-            <Fontisto name="share" size={24} color={theme.colors.primary} />
-          </BorderlessButton>
-        }
-      />
-      <ImageBackground style={styles.banner} source={Banner}>
-        <View style={styles.bannerContent}>
-          <Text style={styles.title}>Lendários</Text>
-          <Text style={styles.subtitle}>É hoje que vamos ao challenger sem perder uma partida da m10</Text>
-        </View>
-      </ImageBackground>
-      <View style={styles.bannerSpace} />
-      <ListHeader title="Jogadores" subtitle="Total 3" />
-      <View style={styles.viewContianer}>
-        <FlatList
-          horizontal={false}
-          data={members}
-          keyExtractor={(item) => item.id}
-          style={styles.members}
-          ItemSeparatorComponent={() => <ListDivider />}
-          renderItem={({ item }) => <Member data={item} />}
+      <View style={styles.container}>
+        <Header
+          title="Detalhes"
+          action={
+            <BorderlessButton>
+              <Fontisto name="share" size={24} color={theme.colors.primary} />
+            </BorderlessButton>
+          }
         />
+        <ImageBackground style={styles.banner} source={Banner}>
+          <View style={styles.bannerContent}>
+            <Text style={styles.title}>Lendários</Text>
+            <Text style={styles.subtitle}>É hoje que vamos ao challenger sem perder uma partida da m10</Text>
+          </View>
+        </ImageBackground>
+        <View style={styles.bannerSpace} />
+        <ListHeader title="Jogadores" subtitle="Total 3" />
+        <View style={styles.viewContianer}>
+          <FlatList
+            horizontal={false}
+            data={members}
+            keyExtractor={(item) => item.id}
+            style={styles.members}
+            ItemSeparatorComponent={() => <ListDivider />}
+            renderItem={({ item }) => <Member data={item} />}
+          />
+        </View>
       </View>
       <View style={styles.footer}>
         <ButtonIcon title="Entrar na partida" />

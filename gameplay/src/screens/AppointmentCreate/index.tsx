@@ -29,6 +29,10 @@ const AppointmentCreate = () => {
     setOpenGuildModal(false)
   }
 
+  const handleCategorySelect = (categoryId: string) => {
+    setCategory(categoryId)
+  }
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView>
@@ -45,7 +49,7 @@ const AppointmentCreate = () => {
         >
           Categoria
         </Text>
-        <CategorySelect hasCheckbox setCategory={setCategory} categorySelected={category} />
+        <CategorySelect hasCheckbox setCategory={handleCategorySelect} categorySelected={category} />
         <View style={styles.form}>
           <RectButton onPress={openModal}>
             <View style={styles.select}>

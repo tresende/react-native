@@ -5,8 +5,11 @@ import { useNavigation } from '@react-navigation/native'
 import { styles } from './styles'
 import IllustrationImage from '../../assets/illustration.png'
 import ButtonIcon from '../../components/ButtonIcon'
+import { useAuth } from '../../hooks/auth'
 
 const SignIn = () => {
+  const auth = useAuth()
+  console.log(auth)
   const navigation = useNavigation()
 
   const handleSignIn = () => {

@@ -5,7 +5,7 @@ import WithBackground from './WithBackground'
 
 const WithScroll = (WrappedComponent: React.ComponentType) => {
   const Component = WithBackground(() => (
-    <ScrollView removeClippedSubviews={false}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} removeClippedSubviews={false} style={{ flexGrow: 1 }}>
       <View style={{ flex: 1 }}>
         <WrappedComponent />
       </View>

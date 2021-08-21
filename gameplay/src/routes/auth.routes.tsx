@@ -22,7 +22,7 @@ const AuthRoutes = () => {
     >
       <Screen name="SignIn" component={WithBackground(SignIn)} />
       <Screen name="Home" component={WithBackground(Home)} />
-      <Screen name="AppointmentCreate" component={WithBackground(AppointmentCreate)} />
+      <Screen name="AppointmentCreate" component={WithScroll(AppointmentCreate)} />
       <Screen name="AppointmentDetails" component={WithScroll(AppointmentDetails)} />
     </Navigator>
   )
