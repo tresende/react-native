@@ -6,14 +6,22 @@ import { styles } from './styles'
 import IllustrationImage from '../../assets/illustration.png'
 import ButtonIcon from '../../components/ButtonIcon'
 import { useAuth } from '../../hooks/auth'
+import { Alert } from 'react-native'
 
 const SignIn = () => {
-  const auth = useAuth()
-  console.log(auth)
+  const { user, signIn } = useAuth()
   const navigation = useNavigation()
 
-  const handleSignIn = () => {
-    navigation.navigate('Home')
+  const handleSignIn = async () => {
+    try {
+      const response = await signIn()
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+      Alert.alert(error)
+    }
+
+    //navigation.navigate('Home')
   }
 
   return (

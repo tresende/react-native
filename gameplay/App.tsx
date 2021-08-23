@@ -9,6 +9,7 @@ import { AuthProvider } from './src/hooks/auth'
 import Routes from './src/routes'
 
 LogBox.ignoreLogs([
+  'You are not currently signed in to Expo on your development machine',
   'VirtualizedLists should never be nested' // TODO: Remove when fixed
 ])
 const App = () => {
